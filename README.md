@@ -1,6 +1,11 @@
 # Banner
 RecyclerView 实现无限轮播的 Banner
 
+## 效果如下
+![](https://github.com/Jooyer/Banner/blob/master/gif/3.gif)
+
+
+
 ## 用法如下
 
 ```
