@@ -12,8 +12,11 @@ import androidx.appcompat.widget.AppCompatTextView
 class CustomAdapter(data: List<String>, layoutId: Int) :
     BannerAdapter<String>(data, layoutId) {
     override fun onBindViewHolder(holder: BannerHolder, position: Int) {
-        holder.itemView.findViewById<AppCompatTextView>(R.id.tv_position).text = "$position"
-        ImageLoader.loader.loadImage(holder.itemView.findViewById<AppCompatImageView>(R.id.iv_banner), mData[position])
+        holder.itemView.findViewById<AppCompatTextView>(R.id.tv_position).text = "${position + 1}"
+        ImageLoader.loader.loadImage(
+            holder.itemView.findViewById<AppCompatImageView>(R.id.iv_banner),
+            mData[position]
+        )
     }
 
 }

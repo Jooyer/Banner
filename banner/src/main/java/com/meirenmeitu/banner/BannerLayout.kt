@@ -40,6 +40,12 @@ class BannerLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(co
      * 是否显示指示器,默认显示
      */
     private var mShowIndicatorView = true
+
+    /**
+     * 是否自动轮询
+     */
+    private var mAutoLoop = true
+
     /**
      * 指示器选中状态图片
      */
@@ -98,9 +104,19 @@ class BannerLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(co
                 aar.getDimensionPixelSize(R.styleable.BannerLayout_banner_indicator_margin, mIndicatorMargin)
             mLoopTime = aar.getInt(R.styleable.BannerLayout_banner_loop_time, 3000).toLong()
             mShowIndicatorView = aar.getBoolean(R.styleable.BannerLayout_banner_show_indicator, mShowIndicatorView)
+            mAutoLoop = aar.getBoolean(R.styleable.BannerLayout_banner_auto_loop, mAutoLoop)
             mSelectedDrawable = aar.getDrawable(R.styleable.BannerLayout_banner_select_indicator_drawable)
             mNormalDrawable = aar.getDrawable(R.styleable.BannerLayout_banner_normal_indicator_drawable)
+
+            val viewGap = aar.getDimension(R.styleable.BannerLayout_banner_view_gap,0F).toInt()
+            val widthScale = aar.getFloat(R.styleable.BannerLayout_banner_width_scale,1F)
+            val heightScale = aar.getFloat(R.styleable.BannerLayout_banner_height_scale,1F)
+
             aar.recycle()
+
+            mLayoutManager.setViewGap(viewGap)
+            mLayoutManager.setWidthScale(widthScale)
+            mLayoutManager.setHeightScale(heightScale)
         }
     }
 
@@ -151,7 +167,7 @@ class BannerLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(co
      */
     private fun autoScroll(auto: Boolean) {
         removeCallbacks(mAutoScrollRunnable)
-        if (auto) {
+        if (auto && mAutoLoop) {
             postDelayed(mAutoScrollRunnable, mLoopTime)
         }
     }
@@ -185,6 +201,7 @@ class BannerLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(co
      */
     override fun onPositionChange(position: Int) {
         mCurrentPos = position
+        changeIndicatorState()
     }
 
 
@@ -260,5 +277,6 @@ class BannerLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(co
     fun setOnPositionChangeListener(positionChangeListener: OnPositionChangeListener) {
         mPositionChangeListener = positionChangeListener
     }
+
 
 }

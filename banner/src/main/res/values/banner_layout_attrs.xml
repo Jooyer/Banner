@@ -6,14 +6,23 @@
         <attr name="banner_indicator_height" format="reference|dimension"/>
         <!-- 指示器内部 View  左右Margin -->
         <attr name="banner_indicator_margin" format="reference|dimension"/>
+        <!--  ItemView 之间的margin -->
+        <attr name="banner_view_gap" format="dimension"/>
+        <!-- 宽度缩放 -->
+        <attr name="banner_width_scale" format="float"/>
+        <!-- 高度缩放 -->
+        <attr name="banner_height_scale" format="float"/>
         <!-- 是否显示指示器 -->
         <attr name="banner_show_indicator" format="boolean"/>
+        <!-- 是否循环 -->
+        <attr name="banner_auto_loop" format="boolean"/>
         <!-- 轮播时间间隔 -->
         <attr name="banner_loop_time" format="integer"/>
         <!-- 指示器选中状态图片 -->
         <attr name="banner_select_indicator_drawable" format="reference"/>
         <!-- 指示器默认状态图片 -->
         <attr name="banner_normal_indicator_drawable" format="reference"/>
+
     </declare-styleable>
 
 </resources>
